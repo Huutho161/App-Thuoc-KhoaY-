@@ -184,10 +184,14 @@ def generate_code(nhom, df):
                 nums.append(int(base_num))
     return f"{prefix}{max(nums)+1 if nums else 1:05d}"
 
-if 'df_kho' not in st.session_state or 'df_cd' not in st.session_state or 'df_vt' not in st.session_state:
+if 'df_kho' not in st.session_state or 'df_cd' not in st.session_state:
+    # Load lại toàn bộ dữ liệu từ Cloud
+    data = load_data()
+    # Gán giá trị (Đảm bảo thứ tự và số lượng biến khớp với hàm load_data)
     st.session_state.df_kho, st.session_state.df_ls, st.session_state.df_ns, \
     st.session_state.df_ct, st.session_state.df_dt, st.session_state.df_nhom, \
-    st.session_state.df_audit, st.session_state.df_cd, st.session_state.df_vt = load_data()
+    st.session_state.df_audit, st.session_state.df_cd, st.session_state.df_vt, \
+    st.session_state.df_hd_nam = data
 
 # --- LOGIN LOGIC ---
 if "logged_in" not in st.session_state: st.session_state.logged_in = False
